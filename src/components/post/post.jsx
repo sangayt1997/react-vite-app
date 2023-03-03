@@ -1,0 +1,12 @@
+import classes from "./post.module.css";
+
+function Post(props) {
+    return (
+        <li className={classes.post}>
+            <p className={classes.author}>{props.author}</p>
+            <p className={classes.title}>{props.title}</p>
+        </li>
+    )
+}
+
+export default Post;
