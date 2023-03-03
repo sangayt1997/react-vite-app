@@ -2,6 +2,7 @@ import { useState } from "react";
 import classes from "./posts-list.module.css";
 import Post from "../post/post.jsx";
 import NewPost from "../new-post/new-post.jsx";
+import Modal from "../modal/modal.jsx";
 
 function PostsList() {
     const [enteredTitle, setEnteredTitle] = useState('');
@@ -17,7 +18,9 @@ function PostsList() {
 
     return (
         <>
-            <NewPost onAuthorChange={authorChangeHandler} onTitleChange={titleChangeHandle}/>
+            <Modal>
+                <NewPost onAuthorChange={authorChangeHandler} onTitleChange={titleChangeHandle}/>
+            </Modal>
             <ul className={classes.posts}>
                 <Post author={enteredAuthor} title={enteredTitle}/>
                 <Post author="Manual" title="React is Awesome with Vite!"/>
