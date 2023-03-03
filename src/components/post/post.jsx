@@ -1,10 +1,10 @@
-const name = ['Maximilian', 'Manual'];
+import classes from "./post.module.css";
+
 function Post(props) {
-    const chosenName = Math.random() > 0.5 ? name[0] : name[1];
     return (
-        <div>
-            <p>{props.auther}</p>
-            <p>{props.title}</p>
+        <div className={classes.post}>
+            <p className={classes.author}>{props.author}</p>
+            <p className={classes.title}>{props.title}</p>
         </div>
     )
 }
