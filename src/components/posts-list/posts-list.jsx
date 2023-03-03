@@ -5,6 +5,7 @@ import NewPost from "../new-post/new-post.jsx";
 import Modal from "../modal/modal.jsx";
 
 function PostsList() {
+    const [modalIsVisible, setModalIsVisible] = useState(true);
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAuthor, setEnteredAuthor] = useState('')
 
@@ -16,11 +17,33 @@ function PostsList() {
         setEnteredAuthor(event.target.value);
     }
 
+    function hideModalHandler() {
+        setModalIsVisible(false);
+    }
+
+   /* let modalContent;
+
+    if (modalIsVisible) {
+        modalContent = (
+            <Modal onClose={hideModalHandler}>
+                <NewPost
+                    onAuthorChange={authorChangeHandler}
+                    onTitleChange={titleChangeHandle}
+                />
+            </Modal>
+        );
+    }
+*/
     return (
         <>
-            <Modal>
-                <NewPost onAuthorChange={authorChangeHandler} onTitleChange={titleChangeHandle}/>
-            </Modal>
+            {modalIsVisible && (
+                <Modal onClose={hideModalHandler}>
+                    <NewPost
+                        onAuthorChange={authorChangeHandler}
+                        onTitleChange={titleChangeHandle}
+                    />
+                </Modal>
+            )}
             <ul className={classes.posts}>
                 <Post author={enteredAuthor} title={enteredTitle}/>
                 <Post author="Manual" title="React is Awesome with Vite!"/>
