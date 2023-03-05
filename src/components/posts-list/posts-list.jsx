@@ -10,13 +10,16 @@ function PostsList({isPosting, onStopPosting}) {
     //     setPosts(data.posts);
     // });
     const [posts, setPosts] = useState([]);
+    const [isFetching, setIsFetching] = useState(false);
 
     useEffect(() => {
         async function fetchPosts() {
             const response = await fetch('http://localhost:8080/posts');
             const resData = await response.json();
             setPosts(resData.posts);
+            setIsFetching(false);
         }
+
         fetchPosts();
     }, []);
 
@@ -41,15 +44,20 @@ function PostsList({isPosting, onStopPosting}) {
                     />
                 </Modal>
             )}
-            {posts.length > 0 && (
+            {!isFetching && posts.length > 0 && (
                 <ul className={classes.posts}>
                     {posts.map((post, index) => <Post key={index} author={post.author} title={post.title}/>)}
                 </ul>
             )}
-            {posts.length === 0 && (
+            {!isFetching && posts.length === 0 && (
                 <div className={classes['empty-post']}>
                     <h2>There is no posts yet.</h2>
                     <p>Start adding some post!</p>
+                </div>
+            )}
+            {isFetching && (
+                <div className={classes['empty-post']}>
+                    <p>Loading...</p>
                 </div>
             )}
         </>
