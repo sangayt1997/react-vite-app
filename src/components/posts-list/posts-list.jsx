@@ -1,10 +1,10 @@
 import classes from "./posts-list.module.css";
 import Post from "../post/post.jsx";
-import NewPost from "../new-post/new-post.jsx";
+import NewPost from "../../routes/new-post/new-post.jsx";
 import Modal from "../modal/modal.jsx";
 import { useEffect, useState } from "react";
 
-function PostsList({isPosting, onStopPosting}) {
+function PostsList() {
     // Cause infinite loops not good solution
     // fetch('http://localhost:8080/posts').then(response => response.json()).then(data => {
     //     setPosts(data.posts);
@@ -36,14 +36,6 @@ function PostsList({isPosting, onStopPosting}) {
 
     return (
         <>
-            {isPosting && (
-                <Modal onClose={onStopPosting}>
-                    <NewPost
-                        onCancel={onStopPosting}
-                        onAddPost={addPostHandler}
-                    />
-                </Modal>
-            )}
             {!isFetching && posts.length > 0 && (
                 <ul className={classes.posts}>
                     {posts.map((post, index) => <Post key={index} author={post.author} title={post.title}/>)}
