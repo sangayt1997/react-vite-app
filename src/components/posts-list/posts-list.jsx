@@ -6,9 +6,11 @@ import { useState } from "react";
 
 function PostsList({isPosting, onStopPosting}) {
     const [posts, setPosts] = useState([]);
+
     function addPostHandler(postData) {
-        setPosts((existingPost) => [posts, ...existingPost]);
+        setPosts((existingPosts) => [postData, ...existingPosts]);
     }
+
     return (
         <>
             {isPosting && (
@@ -19,9 +21,17 @@ function PostsList({isPosting, onStopPosting}) {
                     />
                 </Modal>
             )}
-            <ul className={classes.posts}>
-                <Post author="Manual" title="React is Awesome with Vite!"/>
-            </ul>
+            {posts.length > 0 && (
+                <ul className={classes.posts}>
+                    {posts.map((post, index) => <Post key={index} author={post.author} title={post.title}/>)}
+                </ul>
+            )}
+            {posts.length === 0 && (
+                <div className={classes['empty-post']}>
+                    <h2>There is no posts yet.</h2>
+                    <p>Start adding some post!</p>
+                </div>
+            )}
         </>
     )
 }
