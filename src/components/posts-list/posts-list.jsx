@@ -4,8 +4,7 @@ import Post from "../post/post.jsx";
 import NewPost from "../new-post/new-post.jsx";
 import Modal from "../modal/modal.jsx";
 
-function PostsList() {
-    const [modalIsVisible, setModalIsVisible] = useState(true);
+function PostsList({isPosting, onStopPosting}) {
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAuthor, setEnteredAuthor] = useState('')
 
@@ -15,10 +14,6 @@ function PostsList() {
 
     function authorChangeHandler(event) {
         setEnteredAuthor(event.target.value);
-    }
-
-    function hideModalHandler() {
-        setModalIsVisible(false);
     }
 
    /* let modalContent;
@@ -36,11 +31,12 @@ function PostsList() {
 */
     return (
         <>
-            {modalIsVisible && (
-                <Modal onClose={hideModalHandler}>
+            {isPosting && (
+                <Modal onClose={onStopPosting}>
                     <NewPost
                         onAuthorChange={authorChangeHandler}
                         onTitleChange={titleChangeHandle}
+                        onCancel={onStopPosting}
                     />
                 </Modal>
             )}
