@@ -9,22 +9,12 @@ function PostsList() {
     // });
     const posts = useLoaderData();
 
-    function addPostHandler(postData) {
-        fetch('http://localhost:8080/posts', {
-            method: 'POST',
-            body: JSON.stringify(postData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        setPosts((existingPosts) => [postData, ...existingPosts]);
-    }
 
     return (
         <>
             {posts.length > 0 && (
                 <ul className={classes.posts}>
-                    {posts.map((post, index) => <Post key={index} author={post.author} title={post.title}/>)}
+                    {posts.map((post) => <Post key={post.id} id={post.id} author={post.author} title={post.title}/>)}
                 </ul>
             )}
             {posts.length === 0 && (
