@@ -1,26 +1,27 @@
 import classes from "./posts-list.module.css";
 import Post from "../post/post.jsx";
-import NewPost from "../new-post/new-post.jsx";
-import Modal from "../modal/modal.jsx";
-import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
-function PostsList({isPosting, onStopPosting}) {
-    const [posts, setPosts] = useState([]);
+function PostsList() {
+    // Cause infinite loops not good solution
+    // fetch('http://localhost:8080/posts').then(response => response.json()).then(data => {
+    //     setPosts(data.posts);
+    // });
+    const posts = useLoaderData();
 
     function addPostHandler(postData) {
+        fetch('http://localhost:8080/posts', {
+            method: 'POST',
+            body: JSON.stringify(postData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         setPosts((existingPosts) => [postData, ...existingPosts]);
     }
 
     return (
         <>
-            {isPosting && (
-                <Modal onClose={onStopPosting}>
-                    <NewPost
-                        onCancel={onStopPosting}
-                        onAddPost={addPostHandler}
-                    />
-                </Modal>
-            )}
             {posts.length > 0 && (
                 <ul className={classes.posts}>
                     {posts.map((post, index) => <Post key={index} author={post.author} title={post.title}/>)}
