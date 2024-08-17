@@ -7,7 +7,7 @@ This is a simple project that demonstrates how to set up a React project with Vi
 - npm or yarn
 
 
-## Getting Started
+## Getting Started 
 - Install dependencies
 `yarn install`
 
@@ -19,7 +19,7 @@ Open your browser and navigate to http://localhost:3000
 - Start preview
  `yarn preview`
 
-## Building for Production
+## Building for Production 
 `yarn build`
 - This will create a dist folder with your optimized production build.
 
