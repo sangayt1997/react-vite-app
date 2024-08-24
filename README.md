@@ -1,6 +1,6 @@
 # Getting Started with Vite + React
 
-This is a simple project that demonstrates how to set up a React project with Vite.
+This is a simple project that demonstrates how to set up a React project with Vite. 
 
 ## Prerequisites
 - Node.js (version 12 or above)
